@@ -1,0 +1,34 @@
+{{define "content"}}
+
+<form class="form-signin" action="{{ .Methods.Password.Config.Action }}" method="{{ .Methods.Password.Config.Method }}">
+  <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign Up</h1>
+  {{range $key, $val := .Methods.Password.Config.Fields}}
+  {{ if eq $val.Type "hidden"}}
+  <input id="{{$val.Name}}" type="{{$val.Type}}" name={{$val.Name}} value="{{$val.Value}}" />
+  {{else}}
+  <fieldset>
+    <label>    
+      <input id="{{$val.Name}}" class="form-control" placeholder="{{$val.Name}}" type="{{$val.Type}}" name={{$val.Name}}
+        value="{{$val.Value}}" />
+
+      {{ if $val.Errors }}
+      <ul>
+        {{range $e := $val.Errors}}
+        <li>{{ $e }}</li>
+        {{end}}
+      </ul>
+      {{end}}
+
+    </label>
+  </fieldset>
+  {{end}}
+  {{end}}
+
+  <input class="btn btn-primary btn-block" type="submit" />
+
+  {{ range $val := .Methods.Password.Config.Errors}}
+  <p>Error: {{ $val.Message }}</p>
+  {{end}}
+</form>
+
+{{end}}

@@ -1,0 +1,25 @@
+{{define "content"}}
+<form class="form-signin" action="{{ .Form.Action }}" method="{{ .Form.Method }}">
+  <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Profile</h1>
+  {{range $key, $val := .Form.Fields}}
+  {{ if eq $val.Type "hidden"}}
+  <input id="{{$val.Name}}" type="{{$val.Type}}" name={{$val.Name}} value="{{$val.Value}}" />
+  {{else}}
+  <fieldset>
+    <label>
+      <input class="form-control" placeholder="{{$val.Name}}" id="{{$val.Name}}" type="{{$val.Type}}" name={{$val.Name}}
+        value="{{$val.Value}}" />
+      {{ if $val.Errors }}
+      <ul>
+        {{range $e := $val.Errors}}
+        <li>{{ $e }}</li>
+        {{end}}
+      </ul>
+      {{end}}
+    </label>
+  </fieldset>
+  {{end}}{{end}}
+  <input class="btn btn-primary btn-block" type="submit" />
+  <a class="btn btn-primary btn-block" href="/logout">Logout</a>
+</form>
+{{end}}

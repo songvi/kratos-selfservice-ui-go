@@ -1,0 +1,40 @@
+{{define "content"}}
+
+<form class="form-signin" action="{{ .Methods.Password.Config.Action }}" method="{{ .Methods.Password.Config.Method }}">
+  <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
+  <div class="social-login">
+    <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with
+        Facebook</span> </button>
+    <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with
+        Google+</span> </button>
+  </div>
+  <br />
+  {{range $key, $val := .Methods.Password.Config.Fields}}
+  {{ if eq $val.Type "hidden"}}
+  <input id="{{$val.Name}}" type="{{$val.Type}}" name={{$val.Name}} value="{{$val.Value}}" />
+  {{else}}
+  <fieldset>
+    <label>
+      <input class="form-control" placeholder="{{$val.Name}}" id="{{$val.Name}}" type="{{$val.Type}}" name={{$val.Name}}
+        value="{{$val.Value}}" />
+      {{ if $val.Errors }}
+      <ul>
+        {{range $e := $val.Errors}}
+        <li>{{ $e }}</li>
+        {{end}}
+      </ul>
+      {{end}}
+    </label>
+  </fieldset>
+  {{end}}
+
+
+  {{end}}
+  {{ range $val := .Methods.Password.Config.Errors}}
+  <p>Error: {{ $val.Message }}</p>
+  {{end}}
+  <input class="btn btn-primary btn-block" type="submit" value="Login" />
+
+  <a class="btn btn-primary btn-block" href="/auth/registration"><i class="fas fa-user-plus"></i> Sign Up</a>
+</form>
+{{end}}

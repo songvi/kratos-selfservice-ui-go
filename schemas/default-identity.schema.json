@@ -1,0 +1,61 @@
+{
+    "$id": "https://example.org/identity.traits.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Person",
+    "type": "object",
+    "properties": {
+        "display_name": {
+            "type": "string"
+        },
+        "avantar": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "bio": {
+            "type": "string",
+            "maxLength": 1000
+        },
+        "url": {
+            "type": "string",
+            "maxLength": 1000
+        },
+        "company": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "location": {
+            "type": "string",
+            "maxLength": 255
+        },
+        "email": {
+            "type": "string",
+            "format": "email",
+            "title": "E-mail",            
+            "minLength": 3,
+            "ory.sh/kratos": {
+                "credentials": {
+                    "password": {
+                        "identifier": true
+                    }
+                }
+            }
+        },
+        "mobile": {
+            "type": "string",
+            "title": "Mobile phone",
+            "minLength": 7,
+            "maxLength": 12,
+            "ory.sh/kratos": {
+                "credentials": {
+                    "password": {
+                        "identifier": true
+                    }
+                }
+            }
+        }
+    },
+    "required": [
+        "email",
+        "display_name"
+    ]
+}

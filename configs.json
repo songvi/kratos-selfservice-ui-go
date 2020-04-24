@@ -1,0 +1,32 @@
+{
+    "kratos": {
+        "urls": {
+            "flows": {
+                "admin": "http://127.0.0.1:8084/admin/self-service/browser/",
+                "browser": "http://127.0.0.1:4455/self-service/browser/",
+                "login": "http://127.0.0.1:8084/admin/self-service/browser/flows/requests/login",
+                "registration": "http://127.0.0.1:8084/admin/self-service/browser/flows/requests/registration",
+                "profile": "http://127.0.0.1:8084/admin/self-service/browser/flows/requests/profile",
+                "public": "http://127.0.0.1:4455/.ory/kratos/public/self-service/browser/flows/",
+                "logout": "http://127.0.0.1:4455/.ory/kratos/public/self-service/browser/flows/logout"
+            }
+        }
+    },
+    "listen": "127.0.0.1:1991",
+    "templatedir": "templates",
+    "endpoints": {
+        "profile": "/profile",
+        "login": "/auth/login",
+        "verification": "/verify",
+        "error": "/error",
+        "multifactors": "/mfa",
+        "registration": "/auth/registration",
+        "logout": "/logout"
+    },
+    "oauth2": {
+        "login_provider": "/oauth/login",
+        "consent_provider": "/oauth/consent",
+        "login_api_url": "/oauth2/auth/requests/login",
+        "consent_api_url": "/oauth2/auth/requests/consent"
+    }
+}
