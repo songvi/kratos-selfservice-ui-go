@@ -39,7 +39,7 @@ func (k *Handler) profileHandler() httprouter.Handle {
 
 		if len(requestId) == 0 {
 			// redirect to http://127.0.0.1:4455/.ory/kratos/public/self-service/browser/flows/login
-			http.Redirect(w, r, k.c.KratosPublicFlowsUrl()+"profile", http.StatusFound)
+			http.Redirect(w, r, k.c.KratosPublicFlowsUrl()+"/profile", http.StatusFound)
 			return
 		}
 

@@ -32,7 +32,7 @@ func (dr *DefaultRegistry) WithLogger(logger logrus.FieldLogger) Registry {
 }
 
 func (dr *DefaultRegistry) LoginHandler() *login.Handler {
-	return login.NewLoginHandler(dr.c)
+	return login.NewLoginHandler(dr.c, dr.l)
 }
 
 func (dr *DefaultRegistry) LogoutHandler() *logout.Handler {

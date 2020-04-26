@@ -36,13 +36,12 @@ func (k *Handler) registrationHandler() httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 		// TODO
 		// GET /auth/login?request=abcde
-
 		// check request
 		requestId := r.URL.Query()["request"]
 
 		if len(requestId) == 0 {
 			// redirect to http://127.0.0.1:4455/.ory/kratos/public/self-service/browser/flows/login
-			http.Redirect(w, r, k.c.KratosPublicFlowsUrl()+"registration", http.StatusFound)
+			http.Redirect(w, r, k.c.KratosPublicFlowsUrl()+"/registration", http.StatusFound)
 			return
 		}
 
