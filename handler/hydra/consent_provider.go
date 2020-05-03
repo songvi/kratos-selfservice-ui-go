@@ -20,7 +20,7 @@ type (
 )
 
 func (k *ConsentHandler) RegisterRouter(r *httprouter.Router) {
-	r.GET("//oauth2/consent", k.hydraConsentHandler())
+	r.GET("/oauth2/consent", k.hydraConsentHandler())
 }
 
 func NewHydraConsentHandler(cfg configuration.ConfigProvider) *ConsentHandler {

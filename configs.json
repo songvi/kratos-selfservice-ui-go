@@ -1,16 +1,14 @@
 {
     "kratos": {
-        "urls": {
-            "flows": {
-                "admin": "http://127.0.0.1:8084/admin/self-service/browser/",
-                "browser": "http://127.0.0.1:4455/self-service/browser/",
-                "login": "http://127.0.0.1:8084/admin/self-service/browser/flows/requests/login",
-                "registration": "http://127.0.0.1:8084/admin/self-service/browser/flows/requests/registration",
-                "profile": "http://127.0.0.1:8084/admin/self-service/browser/flows/requests/profile",
-                "public": "http://127.0.0.1:4455/.ory/kratos/public/self-service/browser/flows/",
-                "logout": "http://127.0.0.1:4455/.ory/kratos/public/self-service/browser/flows/logout"
-            }
-        }
+        "services": {
+            "admin": "http://127.0.0.1:1234",
+            "public": "http://127.0.0.1:1235"
+        },
+        "browser": {
+            "init-path": "/self-service/browser/flows",
+            "request-path": "/self-service/browser/flows/requests"
+        },
+        "api": {}
     },
     "listen": "127.0.0.1:1991",
     "templatedir": "templates",

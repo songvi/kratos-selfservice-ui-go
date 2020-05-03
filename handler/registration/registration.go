@@ -41,12 +41,12 @@ func (k *Handler) registrationHandler() httprouter.Handle {
 
 		if len(requestId) == 0 {
 			// redirect to http://127.0.0.1:4455/.ory/kratos/public/self-service/browser/flows/login
-			http.Redirect(w, r, k.c.KratosPublicFlowsUrl()+"/registration", http.StatusFound)
+			http.Redirect(w, r, k.c.KratosPublicUrl() + k.c.KratosBrowserInitPath() + "/registration", http.StatusFound)
 			return
 		}
 
 		// Got Login Request JSON Payload
-		loginUrl := k.c.KratosRegistrationFlowUrl() + "?request=" + requestId[0]
+		loginUrl := k.c.KratosAdminUrl() + k.c.KratosBrowserRequestPath() + "/registration" + "?request=" + requestId[0]
 
 		resp, err := http.Get(loginUrl)
 		if err != nil {

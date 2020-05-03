@@ -38,7 +38,7 @@ func (k *Handler) whoamiHandler() httprouter.Handle {
 			"Accept": []string{"application/json"},
 		}
 		var body []byte
-		req, err := http.NewRequest("GET", "http://127.0.0.1:4455/.ory/kratos/public/sessions/whoami", bytes.NewBuffer(body))
+		req, err := http.NewRequest("GET", k.c.KratosPublicUrl() + "/sessions/whoami", bytes.NewBuffer(body))
 		req.Header = headers
 		cookie, _ := r.Cookie("ory_kratos_session")
 		req.AddCookie(cookie)

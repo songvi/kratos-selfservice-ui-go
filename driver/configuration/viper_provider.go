@@ -18,12 +18,11 @@ var (
 	ViperKeyEndpointRegistration = "endpoints.registration"
 	ViperKeyEndpointLogout       = "endpoints.logout"
 
-	ViperKeyKratosAdmin            = "kratos.urls.admin"
-	ViperKeyKratosProfileFlow      = "kratos.urls.flows.profile"
-	ViperKeyKratosLoginFlow        = "kratos.urls.flows.login"
-	ViperKeyKratosPublicFlows      = "kratos.urls.flows.public"
-	ViperKeyKratosRegistrationFlow = "kratos.urls.flows.registration"
-	ViperKeyKratosLogoutFlow       = "kratos.urls.flows.logout"
+	ViperKeyKratosAdminUrl            = "kratos.services.admin"
+	ViperKeyKratosPublicUrl            = "kratos.services.public"
+
+	ViperKeyKratosBrowserInitPath      = "kratos.browser.init-path"
+	ViperKeyKratosBrowserRequestPath      = "kratos.browser.request-path"
 
 	ViperKeyHydraLoginProviderUrl   = "kratos.hydra.login_provider"
 	ViperKeyHydraConsentProviderUrl = "kratos.hydra.consent_provider"
@@ -51,9 +50,6 @@ func (v *ViperProvider) LogoutUrl() string {
 	return parseURLFromViper(ViperKeyEndpointLogout)
 }
 
-func (v *ViperProvider) KratosPublicFlowsUrl() string {
-	return parseURLFromViper(ViperKeyKratosPublicFlows)
-}
 
 func (v *ViperProvider) LoginUrl() string {
 	return parseURLFromViper(ViperKeyEndpointLogin)
@@ -76,23 +72,19 @@ func (v *ViperProvider) RegistrerUrl() string {
 }
 
 func (v *ViperProvider) KratosAdminUrl() string {
-	return parseURLFromViper(ViperKeyKratosAdmin)
+	return parseURLFromViper(ViperKeyKratosAdminUrl)
 }
 
-func (v *ViperProvider) KratosProfileFlowUrl() string {
-	return parseURLFromViper(ViperKeyKratosProfileFlow)
+func (v *ViperProvider) KratosPublicUrl() string {
+	return parseURLFromViper(ViperKeyKratosPublicUrl)
 }
 
-func (v *ViperProvider) KratosLoginFlowUrl() string {
-	return parseURLFromViper(ViperKeyKratosLoginFlow)
+func (v *ViperProvider) KratosBrowserInitPath() string {
+	return parseURLFromViper(ViperKeyKratosBrowserInitPath)
 }
 
-func (v *ViperProvider) KratosLogoutFlowsUrl() string {
-	return parseURLFromViper(ViperKeyKratosLogoutFlow)
-}
-
-func (v *ViperProvider) KratosRegistrationFlowUrl() string {
-	return parseURLFromViper(ViperKeyKratosRegistrationFlow)
+func (v *ViperProvider) KratosBrowserRequestPath() string {
+	return parseURLFromViper(ViperKeyKratosBrowserRequestPath)
 }
 
 func (v *ViperProvider) HydraAPILoginUrl() string {

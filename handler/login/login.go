@@ -53,15 +53,16 @@ func (k *Handler) loginHandler(w http.ResponseWriter, r *http.Request, params ht
 		params.Add("login_challenge", "1234")
 		baseUrl.RawQuery = params.Encode()
 		//k.l.Infof(k.c.KratosPublicFlowsUrl() + "/login" + "?return_to=" + baseUrl.String())
-		k.l.Info("Redirect to " + k.c.KratosPublicFlowsUrl() + "/login" + "?return_to=" + baseUrl.String())
-		http.Redirect(w, r, k.c.KratosPublicFlowsUrl()+"/login"+"?return_to="+baseUrl.String(), http.StatusFound)
+		k.l.Info("Redirect to " + k.c.KratosPublicUrl() + k.c.KratosBrowserInitPath() + "/login" + "?return_to=" + baseUrl.String())
+		//http.Redirect(w, r, k.c.KratosPublicFlowsUrl()+"/login"+"?return_to="+baseUrl.String(), http.StatusFound)
+		http.Redirect(w, r, k.c.KratosPublicUrl() + k.c.KratosBrowserInitPath()+"/login", http.StatusFound)
 		return
 	}
 
 	//fmt.Printf("Request ID: %s", requestId[0])
 	// Got Login Request JSON Payload
 
-	loginUrl := k.c.KratosLoginFlowUrl() + "?request=" + requestId[0]
+	loginUrl := k.c.KratosAdminUrl() + k.c.KratosBrowserRequestPath() + "/login" + "?request=" + requestId[0]
 
 	//fmt.Println("LOGGGGGING :" + loginUrl)
 	resp, err := http.Get(loginUrl)

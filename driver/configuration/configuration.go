@@ -12,12 +12,10 @@ type ConfigProvider interface {
 	ErrorUrl() string
 	LogoutUrl() string
 
-	KratosProfileFlowUrl() string
-	KratosLoginFlowUrl() string
-	KratosRegistrationFlowUrl() string
-	KratosPublicFlowsUrl() string
-	KratosLogoutFlowsUrl() string
 	KratosAdminUrl() string
+	KratosPublicUrl() string
+	KratosBrowserInitPath() string
+	KratosBrowserRequestPath() string
 
 	HydraAPILoginUrl() string
 	HydraAPIConsentUrl() string

@@ -25,6 +25,6 @@ func NewLogoutHandler(cfg configuration.ConfigProvider) *Handler {
 func (h *Handler) RegisterRouter(r *httprouter.Router) {
 	r.GET(h.c.LogoutUrl(), func(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 		fmt.Println("Logout request")
-		http.Redirect(w, r, h.c.KratosLogoutFlowsUrl(), http.StatusFound)
+		http.Redirect(w, r, h.c.KratosPublicUrl() + h.c.KratosBrowserInitPath() + "/logout", http.StatusFound)
 	})
 }

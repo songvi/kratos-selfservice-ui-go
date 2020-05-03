@@ -39,14 +39,14 @@ func (k *Handler) profileHandler() httprouter.Handle {
 
 		if len(requestId) == 0 {
 			// redirect to http://127.0.0.1:4455/.ory/kratos/public/self-service/browser/flows/login
-			http.Redirect(w, r, k.c.KratosPublicFlowsUrl()+"/profile", http.StatusFound)
+			http.Redirect(w, r, k.c.KratosPublicUrl()+k.c.KratosBrowserInitPath()+"/profile", http.StatusFound)
 			return
 		}
 
 		//fmt.Printf("Request ID: %s", requestId[0])
 		// Got Login Request JSON Payload
 
-		profileUrl := k.c.KratosProfileFlowUrl() + "?request=" + requestId[0]
+		profileUrl := k.c.KratosAdminUrl() + k.c.KratosBrowserRequestPath() + "/profile" + "?request=" + requestId[0]
 
 		headers := map[string][]string{
 			"Accept": []string{"application/json"},

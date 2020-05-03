@@ -28,14 +28,14 @@ func (h *Handler) RegisterRouter(r *httprouter.Router) {
 
 		if len(requestId) == 0 {
 			// redirect to http://127.0.0.1:4455/.ory/kratos/public/self-service/browser/flows/login
-			http.Redirect(w, r, h.c.KratosAdminUrl() +"/errors?error=", http.StatusFound)
+			http.Redirect(w, r, h.c.KratosAdminUrl() + h.c.KratosBrowserInitPath() + "/errors?error=", http.StatusFound)
 			return
 		}	
 
 		//fmt.Printf("Request ID: %s", requestId[0])
 		// Got Login Request JSON Payload
 
-		errorUrl := h.c.KratosAdminUrl() + "/errors?error=" + requestId[0]
+		errorUrl := h.c.KratosAdminUrl()+ h.c.KratosBrowserInitPath() + "/errors" + "?error=" + requestId[0]
 
 		//fmt.Println("LOGGGGGING :" + loginUrl)
 		resp, err := http.Get(errorUrl)
