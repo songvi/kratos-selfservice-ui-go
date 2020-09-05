@@ -16,22 +16,15 @@
   <fieldset>
     <label>
       <input class="form-control" placeholder="{{$val.Name}}" id="{{$val.Name}}" type="{{$val.Type}}" name={{$val.Name}}
-        value="{{$val.Value}}" />
-      {{ if $val.Errors }}
-      <ul>
-        {{range $e := $val.Errors}}
-        <li>{{ $e }}</li>
-        {{end}}
-      </ul>
-      {{end}}
+        value="{{$val.Value}}" />      
     </label>
   </fieldset>
   {{end}}
 
 
   {{end}}
-  {{ range $val := .Methods.Password.Config.Errors}}
-  <p>Error: {{ $val.Message }}</p>
+  {{ range $val := .Methods.Password.Config.Messages}}
+  <p>Message:{{ $val.Type }}} {{ $val.Text }}</p>
   {{end}}
   <input class="btn btn-primary btn-block" type="submit" value="Login" />
 

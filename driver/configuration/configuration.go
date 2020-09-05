@@ -11,6 +11,7 @@ type ConfigProvider interface {
 	RegistrerUrl() string
 	ErrorUrl() string
 	LogoutUrl() string
+	DashboardUrl() string
 
 	KratosAdminUrl() string
 	KratosPublicUrl() string

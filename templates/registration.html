@@ -11,10 +11,10 @@
       <input id="{{$val.Name}}" class="form-control" placeholder="{{$val.Name}}" type="{{$val.Type}}" name={{$val.Name}}
         value="{{$val.Value}}" />
 
-      {{ if $val.Errors }}
+      {{ if $val.Messages }}
       <ul>
-        {{range $e := $val.Errors}}
-        <li>{{ $e }}</li>
+        {{range $e := $val.Messages}}
+        <li>{{ $e.Text }}</li>
         {{end}}
       </ul>
       {{end}}

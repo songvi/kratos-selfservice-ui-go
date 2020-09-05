@@ -17,12 +17,13 @@ var (
 	ViperKeyEndpointMultiFactors = "endpoints.multifactors"
 	ViperKeyEndpointRegistration = "endpoints.registration"
 	ViperKeyEndpointLogout       = "endpoints.logout"
+	ViperKeyEndpointDashboard    = "endpoints.dashboard"
 
-	ViperKeyKratosAdminUrl            = "kratos.services.admin"
-	ViperKeyKratosPublicUrl            = "kratos.services.public"
+	ViperKeyKratosAdminUrl  = "kratos.services.admin"
+	ViperKeyKratosPublicUrl = "kratos.services.public"
 
-	ViperKeyKratosBrowserInitPath      = "kratos.browser.init-path"
-	ViperKeyKratosBrowserRequestPath      = "kratos.browser.request-path"
+	ViperKeyKratosBrowserInitPath    = "kratos.browser.init-path"
+	ViperKeyKratosBrowserRequestPath = "kratos.browser.request-path"
 
 	ViperKeyHydraLoginProviderUrl   = "kratos.hydra.login_provider"
 	ViperKeyHydraConsentProviderUrl = "kratos.hydra.consent_provider"
@@ -50,7 +51,6 @@ func (v *ViperProvider) LogoutUrl() string {
 	return parseURLFromViper(ViperKeyEndpointLogout)
 }
 
-
 func (v *ViperProvider) LoginUrl() string {
 	return parseURLFromViper(ViperKeyEndpointLogin)
 }
@@ -69,6 +69,10 @@ func (v *ViperProvider) ErrorUrl() string {
 
 func (v *ViperProvider) RegistrerUrl() string {
 	return parseURLFromViper(ViperKeyEndpointRegistration)
+}
+
+func (v *ViperProvider) DashboardUrl() string {
+	return parseURLFromViper(ViperKeyEndpointDashboard)
 }
 
 func (v *ViperProvider) KratosAdminUrl() string {

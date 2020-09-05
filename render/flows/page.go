@@ -29,12 +29,18 @@ type FormConfig struct {
 	Method string           `json:"method"`
 	Fields []htmlform.Field `json:"fields"`
 	Errors []ErrorMessage   `json:"errors,omitempty"`
+	Messages []AttachedMessages `json:"messages,omitempty`
 }
 
 type ErrorMessage struct {
 	Message string `json:"message,omitempty"`
 }
 
+type AttachedMessages struct {
+	Id int `json:"id,omitempty"`
+	Text string `json:"text,omitempty"`
+	Type string `json:"type,omitempty"`
+}
 
 type Profile struct {
 	Title string

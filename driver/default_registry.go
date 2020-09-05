@@ -3,6 +3,7 @@ package driver
 import (
 	"github.com/sirupsen/logrus"
 	"github.com/songvi/kratos-selfservice-ui-go/driver/configuration"
+	"github.com/songvi/kratos-selfservice-ui-go/handler/dashboard"
 	err "github.com/songvi/kratos-selfservice-ui-go/handler/error"
 	"github.com/songvi/kratos-selfservice-ui-go/handler/hydra"
 	"github.com/songvi/kratos-selfservice-ui-go/handler/login"
@@ -44,7 +45,11 @@ func (dr *DefaultRegistry) ProfileHandler() *profile.Handler {
 }
 
 func (dr *DefaultRegistry) RegistrationHandler() *registration.Handler {
-	return registration.NewRegistrationHandler(dr.c)
+	return registration.NewRegistrationHandler(dr.c, dr.l)
+}
+
+func (dr *DefaultRegistry) DashBoardHandler() *dashboard.Handler {
+	return dashboard.NewDashBoardHandler(dr.c, dr.l)
 }
 
 func (dr *DefaultRegistry) ErrorHandler() *err.Handler {

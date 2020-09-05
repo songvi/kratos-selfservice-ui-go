@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/sirupsen/logrus"
 
 	"github.com/songvi/kratos-selfservice-ui-go/driver/configuration"
 	//"github.com/songvi/kratos-selfservice-ui-go/render"
@@ -21,6 +22,7 @@ type (
 
 	Handler struct {
 		c configuration.ConfigProvider
+		l logrus.FieldLogger
 	}
 )
 
@@ -28,8 +30,8 @@ func (k *Handler) RegisterRouter(r *httprouter.Router) {
 	r.GET(k.c.RegistrerUrl(), k.registrationHandler())
 }
 
-func NewRegistrationHandler(cfg configuration.ConfigProvider) *Handler {
-	return &Handler{c: cfg}
+func NewRegistrationHandler(cfg configuration.ConfigProvider, log logrus.FieldLogger) *Handler {
+	return &Handler{c: cfg, l: log}
 }
 
 func (k *Handler) registrationHandler() httprouter.Handle {
@@ -65,6 +67,8 @@ func (k *Handler) registrationHandler() httprouter.Handle {
 			fmt.Errorf("Error during unmarshal json payload %v", err)
 		}
 		registration.Title = "Registration"
+
+		k.l.Infof("Body %s", string(body))
 	
 		// Render
 		t := template.New("Registration Page")

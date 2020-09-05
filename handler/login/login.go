@@ -6,7 +6,6 @@ import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
-	"net/url"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/sirupsen/logrus"
@@ -48,14 +47,15 @@ func (k *Handler) loginHandler(w http.ResponseWriter, r *http.Request, params ht
 
 	if len(requestId) == 0 {
 		// redirect to http://127.0.0.1:4455/.ory/kratos/public/self-service/browser/flows/login
-		baseUrl, _ := url.Parse("http://127.0.0.1:8084/oauth/")
-		params := url.Values{}
-		params.Add("login_challenge", "1234")
-		baseUrl.RawQuery = params.Encode()
+		// baseUrl, _ := url.Parse("http://127.0.0.1:8084/oauth/")
+		// params := url.Values{}
+		// params.Add("login_challenge", "1234")
+		// baseUrl.RawQuery = params.Encode()
 		//k.l.Infof(k.c.KratosPublicFlowsUrl() + "/login" + "?return_to=" + baseUrl.String())
-		k.l.Info("Redirect to " + k.c.KratosPublicUrl() + k.c.KratosBrowserInitPath() + "/login" + "?return_to=" + baseUrl.String())
-		//http.Redirect(w, r, k.c.KratosPublicFlowsUrl()+"/login"+"?return_to="+baseUrl.String(), http.StatusFound)
-		http.Redirect(w, r, k.c.KratosPublicUrl() + k.c.KratosBrowserInitPath()+"/login", http.StatusFound)
+		//k.l.Info("Redirect to " + k.c.KratosPublicUrl() + k.c.KratosBrowserInitPath() + "/login" + "?return_to=" + baseUrl.String())
+
+		k.l.Info("Redirect to " + k.c.KratosPublicUrl() + k.c.KratosBrowserInitPath() + "/login")
+		http.Redirect(w, r, k.c.KratosPublicUrl()+k.c.KratosBrowserInitPath()+"/login", http.StatusFound)
 		return
 	}
 
@@ -64,6 +64,7 @@ func (k *Handler) loginHandler(w http.ResponseWriter, r *http.Request, params ht
 
 	loginUrl := k.c.KratosAdminUrl() + k.c.KratosBrowserRequestPath() + "/login" + "?request=" + requestId[0]
 
+	k.l.Info("Login url: " + loginUrl)
 	//fmt.Println("LOGGGGGING :" + loginUrl)
 	resp, err := http.Get(loginUrl)
 	if err != nil {
@@ -72,7 +73,7 @@ func (k *Handler) loginHandler(w http.ResponseWriter, r *http.Request, params ht
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Printf("Error %v", err)
+		k.l.Error(err)
 	}
 
 	var loginStruct flows.PageLogin
@@ -83,10 +84,10 @@ func (k *Handler) loginHandler(w http.ResponseWriter, r *http.Request, params ht
 	err = json.Unmarshal(body, &loginStruct)
 	if err != nil {
 		// TODO
-		fmt.Errorf("Error during unmarshal json payload %v", err)
+		k.l.Error(err)
 	}
 
-	//fmt.Printf("htmlForm %v", loginStruct)
+	k.l.Infof("Body %s", string(body))
 
 	// Render
 	//render := render.NewHtmlRender(k.c)
@@ -97,6 +98,6 @@ func (k *Handler) loginHandler(w http.ResponseWriter, r *http.Request, params ht
 	err = t.ExecuteTemplate(w, "layout", loginStruct)
 
 	if err != nil {
-		fmt.Errorf("Template execution: %s", err)
+		k.l.Error(err)
 	}
 }

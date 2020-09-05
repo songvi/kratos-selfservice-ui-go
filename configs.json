@@ -1,8 +1,8 @@
 {
     "kratos": {
         "services": {
-            "admin": "http://127.0.0.1:1234",
-            "public": "http://127.0.0.1:1235"
+            "admin": "http://10.8.0.1:4434",
+            "public": "https://kratos.bochuoi.com/.ory/kratos/public"
         },
         "browser": {
             "init-path": "/self-service/browser/flows",
@@ -10,16 +10,17 @@
         },
         "api": {}
     },
-    "listen": "127.0.0.1:1991",
+    "listen": "0.0.0.0:1991",
     "templatedir": "templates",
     "endpoints": {
         "profile": "/profile",
-        "login": "/auth/login",
+        "login": "/login",
         "verification": "/verify",
         "error": "/error",
         "multifactors": "/mfa",
-        "registration": "/auth/registration",
-        "logout": "/logout"
+        "registration": "/registration",
+        "logout": "/logout",
+        "dashboard": "/dashboard"
     },
     "oauth2": {
         "login_provider": "/oauth/login",
